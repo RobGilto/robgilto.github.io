@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Case study: repo_builder — AI agent orchestration platform · Robert Gilto</title>
+  <meta name="description" content="repo_builder is a harness-agnostic AI agent orchestration platform built on Elixir, Phoenix, and OTP — deterministic, durable workflows driving swappable AI harnesses (Claude Code, pi) as supervised child processes. A case study by Robert Gilto." />
+  <meta name="author" content="Robert Gilto" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="canonical" href="https://robgilto.github.io/case-studies/repo-builder.html" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="repo_builder — AI agent orchestration platform" />
+  <meta property="og:description" content="Deterministic orchestration of non-deterministic AI agents, on Elixir/Phoenix/OTP. Durable workflows, a swappable harness contract, and a real-time LiveView console." />
+  <meta property="og:url" content="https://robgilto.github.io/case-studies/repo-builder.html" />
+  <meta property="og:image" content="https://robgilto.github.io/assets/og-card.png" />
+
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    /* Case-study-specific layout — reuses the root design tokens; no build step. */
+    .cs-header { padding-block: clamp(40px, 7vw, 72px) clamp(28px, 4vw, 44px); }
+    .cs-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-mono); font-size: 13.5px; font-weight: 600;
+      color: var(--accent-dark); margin-bottom: 24px;
+    }
+    .cs-kicker {
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--accent-dark); text-transform: uppercase;
+    }
+    .cs-title { font-size: clamp(30px, 5.5vw, 50px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; margin: 8px 0 16px; }
+    .cs-lead { font-size: clamp(18px, 2.6vw, 21px); color: var(--text-soft); max-width: 62ch; }
+    .cs-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .cs-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .cs-body { max-width: 760px; padding-bottom: clamp(56px, 8vw, 96px); }
+    .cs-body h2 {
+      font-size: clamp(22px, 3.2vw, 28px); font-weight: 800; letter-spacing: -0.02em;
+      margin-top: clamp(36px, 5vw, 52px); margin-bottom: 14px; padding-top: 8px;
+    }
+    .cs-body h2 .cs-num { font-family: var(--font-mono); font-size: 15px; color: var(--accent-dark); margin-right: 10px; }
+    .cs-body p { color: var(--text-soft); font-size: 16.5px; margin-bottom: 14px; }
+    .cs-body strong { color: var(--text); }
+    .cs-body code { font-family: var(--font-mono); font-size: 0.88em; background: var(--accent-soft); color: var(--accent-ink); padding: 1px 6px; border-radius: 6px; }
+    .cs-list { margin: 0 0 14px; padding-left: 0; list-style: none; display: grid; gap: 10px; }
+    .cs-list li { position: relative; padding-left: 24px; color: var(--text-soft); font-size: 16px; }
+    .cs-list li::before { content: ""; position: absolute; left: 3px; top: 10px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+    .cs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 8px 0 8px; }
+    .cs-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-sm); }
+    .cs-stat-num { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--accent-dark); }
+    .cs-stat-label { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+    .cs-callout { background: var(--bg-alt); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin: 18px 0; }
+    .cs-callout p { margin: 0; color: var(--text-soft); }
+    @media (max-width: 640px) { .cs-stats { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#cs-main">Skip to content</a>
+
+  <main id="cs-main">
+    <header class="cs-header">
+      <div class="container">
+        <a class="cs-back" href="../index.html#projects">← Back to Robert Gilto</a>
+        <p class="cs-kicker">Case study · Open source</p>
+        <h1 class="cs-title">repo_builder — an AI agent orchestration platform</h1>
+        <p class="cs-lead">A harness-agnostic platform that does <strong>deterministic orchestration of non-deterministic AI agents</strong>: humans, cron, and webhooks compose durable workflows (<code>plan → build → review → fix</code>) whose step order survives a crash, while the intelligent work inside each step is delegated to a swappable, supervised external AI harness — Claude Code and <code>pi</code> ship today.</p>
+
+        <div class="cs-meta">
+          <span class="chip">Elixir</span>
+          <span class="chip">Phoenix / LiveView</span>
+          <span class="chip">OTP</span>
+          <span class="chip">Oban</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Claude Code</span>
+          <span class="chip">MCP</span>
+          <span class="chip">erlexec</span>
+        </div>
+
+        <div class="cs-actions">
+          <a class="btn btn-primary" href="https://github.com/RobGilto/repo_builder_elixir" rel="noopener noreferrer" target="_blank">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2A10 10 0 0 0 8.84 21.5c.5.08.66-.23.66-.5v-1.7c-2.77.6-3.36-1.34-3.36-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.59.67.5A10 10 0 0 0 12 2Z"/></svg>
+            View on GitHub
+          </a>
+          <a class="btn btn-ghost" href="../index.html">Robert Gilto — résumé</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <article class="cs-body">
+
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">3+1</div><div class="cs-stat-label">harnesses behind one contract (Claude, pi, Cursor proof + Fake)</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">146</div><div class="cs-stat-label">automated tests, run against a Fake adapter — no live CLI needed</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">5</div><div class="cs-stat-label">command "green gate": compile-as-errors, format, Credo --strict, test, Dialyzer</div></div>
+        </div>
+
+        <h2><span class="cs-num">01</span>The problem</h2>
+        <p>AI coding agents are powerful but <strong>non-deterministic</strong>. If you let an agent decide the whole shape of a multi-step job — plan, then build, then review, then fix — the control flow becomes as unpredictable as the model, and a crash mid-run loses everything. For real software-delivery work you want the <em>opposite</em>: the <strong>sequence</strong> of steps and the branching should be fixed, auditable, and crash-durable, while only the <em>intelligence inside each step</em> stays probabilistic.</p>
+        <p>A second trap is lock-in. Most agent tooling is welded to one vendor's CLI or SDK. The moment a better model or harness appears, you rewrite the orchestration layer.</p>
+
+        <h2><span class="cs-num">02</span>The spec I built to</h2>
+        <p>I built repo_builder spec-first, the same way I work in Claude Code: the desired behaviour is written down as explicit, checkable requirements before implementation, and the spec — not a prompt — is the source of truth. The load-bearing requirements were:</p>
+        <ul class="cs-list">
+          <li><strong>Deterministic, durable workflows.</strong> Every state transition is persisted <em>before</em> it happens, so an in-flight run resumes from its current step after a node restart.</li>
+          <li><strong>Harness-agnostic by construction.</strong> Adding a new AI harness must be <em>one adapter module + one config entry</em> — zero edits to the core event types, schema, or runtime.</li>
+          <li><strong>Typed throughout.</strong> A <code>@spec</code> on every public function, tagged <code>{:ok, t()} | {:error, reason()}</code> tuples over raising, and a CI gate that fails on a single warning.</li>
+          <li><strong>Safe by default.</strong> No orphaned child processes, no secrets in the database, signed external triggers only.</li>
+        </ul>
+
+        <h2><span class="cs-num">03</span>Architecture — a deterministic core driving non-deterministic agents</h2>
+        <p>The core is a <strong>deterministic state machine</strong>; the intelligence in each step is an external CLI spoken to over a normalized event stream. Two execution paths share one canonical contract: a <strong>live path</strong> (a <code>WorkflowEngine.Runner</code> feeding a real-time dashboard) and a <strong>durable path</strong> (Oban workers that persist each transition and reconcile in-flight runs after a restart).</p>
+        <p>The seam that makes harness-swapping cheap is a single closed type: <code>RepoBuilder.Harness.Event</code>, an 8-variant <code>typedstruct</code> sum type carrying an <strong>open</strong> <code>harness :: atom()</code> identity plus a raw escape hatch. Because the identity is open, a new harness needs no change to the event types — only a two-callback adapter (<code>command/1</code> + <code>normalize/2</code>) behind a registry seam. A bundled <strong>no-op Cursor adapter</strong> proves a third harness drops in with zero core edits.</p>
+        <p>Each live agent runs as one <code>erlexec</code>-backed GenServer child with multibyte-safe NDJSON buffering, idle timeout, stdout-overflow backpressure, and an admission concurrency gate — classic OTP supervision applied to external AI processes.</p>
+
+        <h2><span class="cs-num">04</span>Reliability &amp; guardrails</h2>
+        <p>This is where the Elixir/OTP background earns its place — the failure modes of spawning many long-running external processes are exactly what BEAM supervision is built for:</p>
+        <ul class="cs-list">
+          <li><strong>Zero-orphan guarantee.</strong> A durable OS-pid ledger plus a boot-time <code>OrphanReaper</code> that verifies <code>/proc/&lt;pid&gt;/environ</code> before signalling, so a crash never leaks runaway agent processes.</li>
+          <li><strong>Secret-safe persistence.</strong> Events are redacted before they hit the database; the live broadcast keeps full detail.</li>
+          <li><strong>Authenticated triggers.</strong> Webhooks are verified with constant-time HMAC-SHA256 over <code>"&lt;timestamp&gt;.&lt;raw_body&gt;"</code> plus a freshness window — rejected <em>before</em> any job is enqueued, so a bad request never becomes a poison job.</li>
+          <li><strong>Cost awareness.</strong> Per-run cost is streamed and tracked, with alerting above a configurable threshold; unpriced models report <code>nil</code> rather than a misleading <code>0.0</code>.</li>
+        </ul>
+
+        <h2><span class="cs-num">05</span>Extensibility — point it at any repo, extend it with plugins</h2>
+        <p>The platform can target <strong>any</strong> repository, not just itself: a target repo is promoted to a first-class <strong>Project</strong> with an auto-detected stack and capability map, a pinned command pack, a budget cap, and optional <code>git worktree</code> isolation so parallel agents never collide. A stack-aware resolver fills capability tokens (<code>{{TEST_COMMAND}}</code> …) so one command body adapts to every stack.</p>
+        <p>The same "add a harness = one module + one config entry" doctrine generalizes to a <strong>plugin system</strong>: versioned packages contribute to a closed set of extension points (command packs, data-defined workflow types, agent templates, orchestrator context fragments, capability data, and code-layer harness adapters) with an open string identity, installable from a local library or a remote store and activated per project.</p>
+
+        <h2><span class="cs-num">06</span>Validation</h2>
+        <p>The whole system is verified the way I want production software verified — not by eyeballing agent output:</p>
+        <ul class="cs-list">
+          <li><strong>146 automated tests</strong> drive the runtime through a <code>Fake</code>/Mock adapter via the registry seam, so the suite needs <em>no external CLIs</em> and runs deterministically in CI.</li>
+          <li>A five-command <strong>green gate</strong> — <code>mix compile --warnings-as-errors</code>, <code>format --check-formatted</code>, <code>credo --strict</code>, <code>test --warnings-as-errors</code>, <code>dialyzer</code> — enforced locally and in GitHub Actions.</li>
+          <li>The only manual step is live acceptance against the real <code>claude</code> and <code>pi</code> CLIs, since those are external tools.</li>
+        </ul>
+
+        <h2><span class="cs-num">07</span>What it taught me</h2>
+        <p>The lesson that transfers to any agentic role: the leverage is in the <strong>boundary</strong>, not the model. A small, closed, well-typed event contract with one open field bought harness-agnosticism, testability without live CLIs, and crash-durability all at once. Designing that seam — and writing the spec that demanded it — mattered more than any single prompt.</p>
+        <div class="cs-callout">
+          <p>repo_builder is open source. The README documents the full architecture, the harness contract, the webhook signing scheme, and the green gate. → <a href="https://github.com/RobGilto/repo_builder_elixir" rel="noopener noreferrer" target="_blank">github.com/RobGilto/repo_builder_elixir</a></p>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom" style="border-top:none;">
+      <p>&copy; <span id="year">2026</span> Robert Gilto.</p>
+      <p><a href="../index.html">← Back to résumé</a></p>
+    </div>
+  </footer>
+
+  <script>
+    var y = document.getElementById("year");
+    if (y) y.textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

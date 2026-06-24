@@ -14,7 +14,11 @@ A single-page, static personal resume site targeting **agentic engineering / AI 
 web-resume/
 ├── index.html     # markup + SEO/meta + JSON-LD
 ├── styles.css     # all styling (design tokens, responsive)
-├── main.js        # nav toggle, active-section highlight, footer year
+├── main.js        # nav toggle (+ inert a11y), active-section highlight, footer year
+├── assets/
+│   ├── favicon.svg   # "RG" brand mark favicon
+│   ├── og-card.svg   # source for the social share card
+│   └── og-card.png   # 1200×630 OG/Twitter image (rsvg-convert og-card.svg -o og-card.png)
 ├── .gitignore
 └── README.md      # this file
 ```
@@ -35,28 +39,28 @@ To stop the server: press `Ctrl + C`.
 ## Deploy to GitHub Pages
 
 This repo is meant to be pushed to the **user site**
-`github.com/robertgilto/robertgilto.github.io`, which GitHub Pages serves
-automatically at `https://robertgilto.github.io`.
+`github.com/RobGilto/robgilto.github.io`, which GitHub Pages serves
+automatically at `https://robgilto.github.io`.
 
 ### One-time setup
 
-1. Create a **public** repository on GitHub named **exactly** `robertgilto.github.io`
+1. Create a **public** repository on GitHub named **exactly** `robgilto.github.io`
    (do not initialize it with a README — this repo already has history).
 
 2. From this directory, point the repo at GitHub and push:
 
    ```bash
-   git remote add origin git@github.com:robertgilto/robertgilto.github.io.git
+   git remote add origin git@github.com:RobGilto/robgilto.github.io.git
    git push -u origin main
    ```
 
    (If you prefer HTTPS instead of SSH:
-   `git remote add origin https://github.com/robertgilto/robertgilto.github.io.git`)
+   `git remote add origin https://github.com/RobGilto/robgilto.github.io.git`)
 
 3. Wait ~1–2 minutes. For **user sites** (`<user>.github.io`), GitHub Pages is
    enabled automatically from the `main` branch root.
 
-4. Visit **https://robertgilto.github.io** — your site is live. 🚀
+4. Visit **https://robgilto.github.io** — your site is live. 🚀
 
 ### Subsequent updates
 
@@ -76,7 +80,24 @@ The site rebuilds and publishes automatically on each push to `main`.
 
 ## Notes
 
-- All copy is sourced from the profile brief — no invented experience.
-- The GitHub contact link is a placeholder (`href="#"`) until
-  `github.com/robertgilto` exists. Search the HTML for the `TODO:` comment to
-  update it.
+- All copy is sourced from the profile brief (`../_profile-source.md`) — no invented experience.
+- Positioning is **hybrid**: leads with "AI-assisted engineering" + a spec-driven
+  "How I work" section (truthful today); the stronger "agentic" claim is earned
+  by a planned agentic showcase project (see below).
+- **GitHub links point to `github.com/RobGilto`** (profile) and the showcase repo
+  `github.com/RobGilto/repo_builder_elixir`. The repo must be **public** for the
+  case-study/project links to resolve.
+- If you edit `assets/og-card.svg`, regenerate the PNG:
+  `cd assets && rsvg-convert og-card.svg -o og-card.png`.
+
+## Featured case study
+
+`case-studies/repo-builder.html` — a write-up of **repo_builder**, the agentic
+orchestration platform (Elixir/Phoenix/OTP) that earns the agentic positioning.
+Linked from the featured card in "Selected work".
+
+## Deploy URL
+
+Confirmed: the live site is **`https://robgilto.github.io`** (GitHub user
+`RobGilto`). All absolute URLs in `index.html` and `case-studies/repo-builder.html`
+(`canonical`, `og:url`, `og:image`, `twitter:image`, JSON-LD `url`/`image`) use it.

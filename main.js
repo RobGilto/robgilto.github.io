@@ -29,20 +29,45 @@
   onScroll();
 
   /* ---- Mobile nav toggle ---- */
+  // At mobile widths a closed menu must be inert + hidden from assistive tech
+  // so its links are not focusable/announced. On desktop the nav is always
+  // visible and interactive, so it must never be inert.
+  var mqlMobile = window.matchMedia("(max-width: 768px)");
+  function syncNavHidden() {
+    if (!primaryNav) return;
+    var open = navToggle && navToggle.getAttribute("aria-expanded") === "true";
+    var hide = mqlMobile.matches && !open;
+    if (hide) {
+      primaryNav.setAttribute("inert", "");
+      primaryNav.setAttribute("aria-hidden", "true");
+    } else {
+      primaryNav.removeAttribute("inert");
+      primaryNav.removeAttribute("aria-hidden");
+    }
+  }
   function closeNav() {
     if (!navToggle || !primaryNav) return;
     navToggle.setAttribute("aria-expanded", "false");
     primaryNav.classList.remove("is-open");
+    syncNavHidden();
   }
   function toggleNav() {
     if (!navToggle || !primaryNav) return;
     var open = navToggle.getAttribute("aria-expanded") === "true";
     navToggle.setAttribute("aria-expanded", String(!open));
     primaryNav.classList.toggle("is-open", !open);
+    syncNavHidden();
   }
   if (navToggle) {
     navToggle.addEventListener("click", toggleNav);
   }
+  // Keep inert state correct across viewport changes (e.g. rotate / resize).
+  if (mqlMobile.addEventListener) {
+    mqlMobile.addEventListener("change", syncNavHidden);
+  } else if (mqlMobile.addListener) {
+    mqlMobile.addListener(syncNavHidden);
+  }
+  syncNavHidden();
   // Close after choosing a link (mobile)
   navLinks.forEach(function (link) {
     link.addEventListener("click", closeNav);
