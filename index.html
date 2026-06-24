@@ -4,20 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- No-flash theme bootstrap: set the theme before the stylesheet paints. Dark is default. -->
+  <script>document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";</script>
+
   <title>Robert Gilto — AI-Assisted Engineering &amp; Data Consultant</title>
-  <meta name="description" content="Robert Gilto is an AI-assisted engineering and data consultant based in Australia. He ships automation and AI tools using spec-driven development with Claude Code — Python, SQL, Domo, and LLM workflows — with 100+ enterprise cases resolved and production automation deployed." />
+  <meta name="description" content="AI-assisted engineering and data consultant in Australia. I build automation and AI tools spec-first with Claude Code — Python, SQL, Domo, and LLM workflows. 100+ enterprise cases resolved, production automation shipped." />
   <meta name="author" content="Robert Gilto" />
-  <meta name="theme-color" content="#4f46e5" />
+  <meta name="theme-color" content="#131318" />
   <link rel="canonical" href="https://robgilto.github.io/" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile" />
   <meta property="og:title" content="Robert Gilto — AI-Assisted Engineering &amp; Data Consultant" />
-  <meta property="og:description" content="Ships automation and AI tools using spec-driven development with Claude Code, Python, SQL, and LLM workflows. Based in Australia, working across APAC." />
+  <meta property="og:description" content="I build automation and AI tools spec-first with Claude Code: Python, SQL, and LLM workflows. Based in Australia, working across APAC." />
   <meta property="og:url" content="https://robgilto.github.io/" />
   <meta property="og:site_name" content="Robert Gilto" />
-  <meta property="og:image" content="https://robgilto.github.io/assets/og-card.png" />
+  <meta property="og:image" content="https://robgilto.github.io/assets/og-card-dark.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Robert Gilto — AI-assisted engineering & automation that ships" />
@@ -27,8 +30,8 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Robert Gilto — AI-Assisted Engineering &amp; Data Consultant" />
-  <meta name="twitter:description" content="Ships automation and AI tools — spec-driven development with Claude Code, Python, SQL, and LLM workflows. Australia / APAC." />
-  <meta name="twitter:image" content="https://robgilto.github.io/assets/og-card.png" />
+  <meta name="twitter:description" content="I build automation and AI tools spec-first with Claude Code: Python, SQL, and LLM workflows. Australia / APAC." />
+  <meta name="twitter:image" content="https://robgilto.github.io/assets/og-card-dark.png" />
 
   <link rel="stylesheet" href="styles.css" />
 
@@ -39,10 +42,10 @@
     "@type": "Person",
     "name": "Robert Gilto",
     "jobTitle": "AI-Assisted Engineering & Data Consultant",
-    "description": "Ships automation and AI tools using spec-driven development with Claude Code. AI-assisted engineering, automation scripting, and data consulting.",
+    "description": "I build automation and AI tools spec-first with Claude Code. AI-assisted engineering, automation scripting, and data consulting.",
     "email": "robgilto@gmail.com",
     "url": "https://robgilto.github.io/",
-    "image": "https://robgilto.github.io/assets/og-card.png",
+    "image": "https://robgilto.github.io/assets/og-card-dark.png",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "AU",
@@ -89,23 +92,30 @@
         <span class="brand-name">Robert Gilto</span>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
+      <div class="header-right">
+        <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+          <ul>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#approach">How I work</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#consulting">Consulting</a></li>
+            <li><a href="#exploring">Exploring</a></li>
+            <li><a href="#contact" class="nav-cta">Contact</a></li>
+          </ul>
+        </nav>
 
-      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <ul>
-          <li><a href="#capabilities">Capabilities</a></li>
-          <li><a href="#approach">How I work</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#consulting">Consulting</a></li>
-          <li><a href="#exploring">Exploring</a></li>
-          <li><a href="#contact" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-13a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1Zm0 14a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 12a1 1 0 0 1 1-1h1.5a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm14.5-1H20a1 1 0 1 1 0 2h-1.5a1 1 0 1 1 0-2ZM6.34 6.34a1 1 0 0 1 1.41 0l1.06 1.06A1 1 0 0 1 7.4 8.81L6.34 7.75a1 1 0 0 1 0-1.41Zm9.19 9.19a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 0 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm1.06-9.19a1 1 0 0 1 0 1.41L16.6 8.81a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM7.4 15.53a1 1 0 0 1 0 1.41L6.34 18a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -118,8 +128,8 @@
           Open to agentic &amp; AI engineering roles
         </p>
         <h1 class="hero-heading" id="hero-heading">Robert Gilto</h1>
-        <p class="hero-tagline">I build automation and AI-assisted tools that ship — turning platform gaps into production solutions.</p>
-        <p class="hero-sub">AI-assisted engineering with a spec-driven workflow, automation scripting, and data consulting. Based in <strong>Australia</strong>, working across <strong>APAC</strong>.</p>
+        <p class="hero-tagline">I build automation and AI tools that ship. I spot the platform gap, write the spec, then turn it into a production solution.</p>
+        <p class="hero-sub">I work spec-first: AI-assisted engineering, automation scripting, and data consulting. Based in <strong>Australia</strong>, working across <strong>APAC</strong>.</p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="mailto:robgilto@gmail.com">
@@ -144,7 +154,7 @@
         <header class="section-head">
           <span class="section-index">01</span>
           <h2 class="section-title" id="capabilities-heading">Capabilities</h2>
-          <p class="section-lead">A full-stack problem-solving toolkit — led by AI/LLM and agentic tooling, backed by deep SQL and data engineering.</p>
+          <p class="section-lead">A full-stack problem-solving toolkit, led by AI and agentic tooling and backed by deep SQL and data work.</p>
         </header>
 
         <div class="skill-grid">
@@ -157,7 +167,7 @@
               <li class="chip">Google Gemini</li>
               <li class="chip">Replit</li>
             </ul>
-            <p class="skill-card-note">Rapid prototyping, AI-assisted debugging, automated testing &amp; validation, prompt iteration, and shipping solutions in days rather than weeks.</p>
+            <p class="skill-card-note">Rapid prototyping, AI-assisted debugging, automated testing and validation, and prompt iteration. I ship in days, not weeks.</p>
           </article>
 
           <article class="skill-card">
@@ -222,7 +232,7 @@
         <header class="section-head">
           <span class="section-index">02</span>
           <h2 class="section-title" id="approach-heading">How I work</h2>
-          <p class="section-lead">Spec-driven development with Claude Code — I turn an ambiguous problem into a written spec, then into shippable software I can validate against. The spec, not the prompt, is the source of truth.</p>
+          <p class="section-lead">I work spec-first with Claude Code. An ambiguous problem becomes a written spec, then shippable software I can check against. The spec is the source of truth, not the prompt.</p>
         </header>
 
         <ol class="approach-steps">
@@ -230,35 +240,35 @@
             <span class="approach-num" aria-hidden="true">1</span>
             <div>
               <h3 class="approach-title">Frame the problem</h3>
-              <p>Discovery and requirements first — clarify the real objective and constraints before writing any code. The same instinct that spotted Domo's missing PDF export as a solvable gap.</p>
+              <p>Discovery and requirements first. I clarify the real objective and the constraints before writing any code. It's the instinct that spotted Domo's missing PDF export as a fixable gap.</p>
             </div>
           </li>
           <li class="approach-step">
             <span class="approach-num" aria-hidden="true">2</span>
             <div>
               <h3 class="approach-title">Write the spec</h3>
-              <p>Capture the desired behaviour as explicit, checkable requirements — the contract the solution has to satisfy, and the thing I review against later.</p>
+              <p>I capture the behaviour I want as explicit, checkable requirements. That's the contract the solution has to meet, and what I review against later.</p>
             </div>
           </li>
           <li class="approach-step">
             <span class="approach-num" aria-hidden="true">3</span>
             <div>
               <h3 class="approach-title">Decompose into steps</h3>
-              <p>Break the spec into ordered, machine-executable tasks — the unit of work I hand to Claude Code, one reviewable change at a time.</p>
+              <p>I break the spec into ordered, executable tasks. Each one is a unit of work I hand to Claude Code, one reviewable change at a time.</p>
             </div>
           </li>
           <li class="approach-step">
             <span class="approach-num" aria-hidden="true">4</span>
             <div>
               <h3 class="approach-title">Build with Claude Code</h3>
-              <p>Drive the implementation with AI assistance and tight iteration loops — fast prototyping, AI-assisted debugging, and rapid course-correction against the spec.</p>
+              <p>I drive the build with AI assistance and tight iteration loops: fast prototyping, AI-assisted debugging, and quick course-correction against the spec.</p>
             </div>
           </li>
           <li class="approach-step">
             <span class="approach-num" aria-hidden="true">5</span>
             <div>
               <h3 class="approach-title">Validate &amp; ship</h3>
-              <p>Test against the spec in a real environment before it goes out — how the 38K/day email-filter fix was proven in development, then deployed within days.</p>
+              <p>I test against the spec in a real environment before it goes out. That's how the 38K/day email-filter fix was proven in development, then deployed within days.</p>
             </div>
           </li>
         </ol>
@@ -271,7 +281,7 @@
         <header class="section-head">
           <span class="section-index">03</span>
           <h2 class="section-title" id="projects-heading">Selected work</h2>
-          <p class="section-lead">Production pieces — each one a gap I spotted, a solution I built, and an outcome I shipped.</p>
+          <p class="section-lead">Production work. Each one is a gap I spotted, a solution I built, and an outcome I shipped.</p>
         </header>
 
         <div class="project-grid">
@@ -306,7 +316,7 @@
             </div>
             <h3 class="project-title">App Studio dashboard PDF export</h3>
             <p class="project-problem"><strong>Problem.</strong> Domo's App Studio had no native PDF export, blocking enterprise customers from delivering analytics.</p>
-            <p class="project-approach"><strong>Approach.</strong> Identified the gap independently, designed a Chrome extension, and built it with Claude Code — then tested it against real customer dashboards.</p>
+            <p class="project-approach"><strong>Approach.</strong> I spotted the gap, designed a Chrome extension, and built it with Claude Code, then tested it against real customer dashboards.</p>
             <p class="project-outcome"><strong>Outcome.</strong> Shipped to production and into active use by enterprise customers, closing a critical product capability gap.</p>
             <ul class="chips chips-sm">
               <li class="chip">Chrome Extension API</li>
@@ -322,7 +332,7 @@
             </div>
             <h3 class="project-title">Email notification filter (38K/day)</h3>
             <p class="project-problem"><strong>Problem.</strong> An enterprise customer's mail server was overwhelmed by 38,000+ dataset notifications a day.</p>
-            <p class="project-approach"><strong>Approach.</strong> Scripted an automated filtering and cleanup solution with Claude Code, validated it in a development environment, then deployed.</p>
+            <p class="project-approach"><strong>Approach.</strong> I scripted a filter and cleanup with Claude Code, proved it in a development environment, then deployed.</p>
             <p class="project-outcome"><strong>Outcome.</strong> Resolved the incident within days and prevented further service disruption.</p>
             <ul class="chips chips-sm">
               <li class="chip">Python</li>
@@ -337,7 +347,7 @@
             </div>
             <h3 class="project-title">Twilio compliance automation</h3>
             <p class="project-problem"><strong>Problem.</strong> Daily Twilio mobile compliance processing across Mindbody platforms was manual, slow, and error-prone.</p>
-            <p class="project-approach"><strong>Approach.</strong> Built a Python automation script against the Twilio API to handle provisioning and compliance end-to-end.</p>
+            <p class="project-approach"><strong>Approach.</strong> I built a Python script against the Twilio API to handle provisioning and compliance end to end.</p>
             <p class="project-outcome"><strong>Outcome.</strong> Cut daily processing time by <strong>50%</strong> and reduced errors across the platform.</p>
             <ul class="chips chips-sm">
               <li class="chip">Python</li>
@@ -352,7 +362,7 @@
             </div>
             <h3 class="project-title">Excel VBA &amp; Power Query reporting</h3>
             <p class="project-problem"><strong>Problem.</strong> Customers needed custom reporting and data processing that out-of-the-box tools couldn't deliver.</p>
-            <p class="project-approach"><strong>Approach.</strong> Built VBA macros and Power Query solutions that generated backend tables for self-service reporting.</p>
+            <p class="project-approach"><strong>Approach.</strong> I built VBA macros and Power Query solutions that generated backend tables for self-service reporting.</p>
             <p class="project-outcome"><strong>Outcome.</strong> Enabled customer self-service reporting and sped up reporting delivery across the Mindbody customer base.</p>
             <ul class="chips chips-sm">
               <li class="chip">VBA</li>
@@ -443,7 +453,7 @@
         <div class="practice-grid">
           <article class="practice-card">
             <h3 class="practice-title">Domo platform, end-to-end</h3>
-            <p>Beast Mode calculations, Magic ETL, App Studio, and data connectors — delivered production solutions and dashboards for enterprise customers.</p>
+            <p>Beast Mode calculations, Magic ETL, App Studio, and data connectors. I delivered production solutions and dashboards for enterprise customers.</p>
           </article>
 
           <article class="practice-card">
@@ -458,7 +468,7 @@
 
           <article class="practice-card">
             <h3 class="practice-title">Enterprise engagement</h3>
-            <p>Resolved 100+ complex cases for APAC's largest customers and coordinated cross-functional work — including an AWS PrivateLink integration driven between the customer and internal teams.</p>
+            <p>I resolved 100+ complex cases for APAC's largest customers and coordinated cross-functional work, including an AWS PrivateLink integration I drove between the customer and internal teams.</p>
           </article>
         </div>
       </div>
@@ -470,21 +480,21 @@
         <header class="section-head">
           <span class="section-index">06</span>
           <h2 class="section-title" id="exploring-heading">Currently exploring</h2>
-          <p class="section-lead">Where I'm investing next — momentum, not a gap.</p>
+          <p class="section-lead">Where I'm investing next. Momentum, not a gap.</p>
         </header>
 
         <div class="exploring-grid">
           <article class="exploring-item">
             <h3 class="exploring-title">Model Context Protocol</h3>
-            <p>Going deeper on <strong>MCP</strong> — the connective standard for agent-tool integration — from using MCP servers daily toward authoring my own, connecting models to real data sources and APIs safely.</p>
+            <p>I use <strong>MCP</strong> servers daily and I'm working toward authoring my own. It's the connective standard for agent-tool integration: wiring models to real data sources and APIs safely.</p>
           </article>
           <article class="exploring-item">
             <h3 class="exploring-title">Agentic frameworks</h3>
-            <p>Studying <strong>LangGraph</strong>, the <strong>Claude Agent SDK</strong>, and <strong>Mastra</strong> to formalize the rapid-prototyping patterns I already use, and to build orchestrated multi-agent systems rather than single-tool scripts.</p>
+            <p>I'm studying <strong>LangGraph</strong>, the <strong>Claude Agent SDK</strong>, and <strong>Mastra</strong> to formalise the prototyping patterns I already rely on, and to build orchestrated multi-agent systems instead of single-tool scripts.</p>
           </article>
           <article class="exploring-item">
             <h3 class="exploring-title">LLM evaluation &amp; evals</h3>
-            <p>Building a structured practice around output quality — rubrics, benchmarks, and systematic evaluation rather than ad-hoc checks.</p>
+            <p>I'm building a structured practice around output quality: rubrics, benchmarks, and systematic evaluation instead of ad-hoc checks.</p>
           </article>
           <article class="exploring-item">
             <h3 class="exploring-title">Prompt engineering portfolio</h3>
@@ -534,7 +544,7 @@
       <div class="footer-lead">
         <p class="footer-eyebrow">Let's build something</p>
         <h2 class="footer-heading">Get in touch</h2>
-        <p class="footer-tagline">I build automation and AI-assisted tools that ship — turning platform gaps into production solutions.</p>
+        <p class="footer-tagline">I build automation and AI tools that ship. I spot the platform gap, write the spec, then turn it into a production solution.</p>
         <p class="footer-loc">Australia · APAC</p>
       </div>
 

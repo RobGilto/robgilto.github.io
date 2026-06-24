@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- No-flash theme bootstrap: set the theme before the stylesheet paints. Dark is default. -->
+  <script>document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";</script>
+
   <title>Case study: repo_builder — AI agent orchestration platform · Robert Gilto</title>
   <meta name="description" content="repo_builder is a harness-agnostic AI agent orchestration platform built on Elixir, Phoenix, and OTP — deterministic, durable workflows driving swappable AI harnesses (Claude Code, pi) as supervised child processes. A case study by Robert Gilto." />
   <meta name="author" content="Robert Gilto" />
-  <meta name="theme-color" content="#4f46e5" />
+  <meta name="theme-color" content="#131318" />
   <link rel="canonical" href="https://robgilto.github.io/case-studies/repo-builder.html" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 
@@ -15,21 +18,22 @@
   <meta property="og:title" content="repo_builder — AI agent orchestration platform" />
   <meta property="og:description" content="Deterministic orchestration of non-deterministic AI agents, on Elixir/Phoenix/OTP. Durable workflows, a swappable harness contract, and a real-time LiveView console." />
   <meta property="og:url" content="https://robgilto.github.io/case-studies/repo-builder.html" />
-  <meta property="og:image" content="https://robgilto.github.io/assets/og-card.png" />
+  <meta property="og:image" content="https://robgilto.github.io/assets/og-card-dark.png" />
 
   <link rel="stylesheet" href="../styles.css" />
 
   <style>
     /* Case-study-specific layout — reuses the root design tokens; no build step. */
     .cs-header { padding-block: clamp(40px, 7vw, 72px) clamp(28px, 4vw, 44px); }
+    .cs-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
     .cs-back {
       display: inline-flex; align-items: center; gap: 7px;
       font-family: var(--font-mono); font-size: 13.5px; font-weight: 600;
-      color: var(--accent-dark); margin-bottom: 24px;
+      color: var(--accent-text);
     }
     .cs-kicker {
       font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.04em; color: var(--accent-dark); text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--accent-text); text-transform: uppercase;
     }
     .cs-title { font-size: clamp(30px, 5.5vw, 50px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; margin: 8px 0 16px; }
     .cs-lead { font-size: clamp(18px, 2.6vw, 21px); color: var(--text-soft); max-width: 62ch; }
@@ -40,7 +44,7 @@
       font-size: clamp(22px, 3.2vw, 28px); font-weight: 800; letter-spacing: -0.02em;
       margin-top: clamp(36px, 5vw, 52px); margin-bottom: 14px; padding-top: 8px;
     }
-    .cs-body h2 .cs-num { font-family: var(--font-mono); font-size: 15px; color: var(--accent-dark); margin-right: 10px; }
+    .cs-body h2 .cs-num { font-family: var(--font-mono); font-size: 15px; color: var(--accent-text); margin-right: 10px; }
     .cs-body p { color: var(--text-soft); font-size: 16.5px; margin-bottom: 14px; }
     .cs-body strong { color: var(--text); }
     .cs-body code { font-family: var(--font-mono); font-size: 0.88em; background: var(--accent-soft); color: var(--accent-ink); padding: 1px 6px; border-radius: 6px; }
@@ -49,7 +53,7 @@
     .cs-list li::before { content: ""; position: absolute; left: 3px; top: 10px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
     .cs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 8px 0 8px; }
     .cs-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-sm); }
-    .cs-stat-num { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--accent-dark); }
+    .cs-stat-num { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--accent-text); }
     .cs-stat-label { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
     .cs-callout { background: var(--bg-alt); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin: 18px 0; }
     .cs-callout p { margin: 0; color: var(--text-soft); }
@@ -62,7 +66,13 @@
   <main id="cs-main">
     <header class="cs-header">
       <div class="container">
-        <a class="cs-back" href="../index.html#projects">← Back to Robert Gilto</a>
+        <div class="cs-topbar">
+          <a class="cs-back" href="../index.html#projects">← Back to Robert Gilto</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-13a1 1 0 0 1 1 1v1.5a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1Zm0 14a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 12a1 1 0 0 1 1-1h1.5a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm14.5-1H20a1 1 0 1 1 0 2h-1.5a1 1 0 1 1 0-2ZM6.34 6.34a1 1 0 0 1 1.41 0l1.06 1.06A1 1 0 0 1 7.4 8.81L6.34 7.75a1 1 0 0 1 0-1.41Zm9.19 9.19a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 0 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm1.06-9.19a1 1 0 0 1 0 1.41L16.6 8.81a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM7.4 15.53a1 1 0 0 1 0 1.41L6.34 18a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/></svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+          </button>
+        </div>
         <p class="cs-kicker">Case study · Open source</p>
         <h1 class="cs-title">repo_builder — an AI agent orchestration platform</h1>
         <p class="cs-lead">A harness-agnostic platform that does <strong>deterministic orchestration of non-deterministic AI agents</strong>: humans, cron, and webhooks compose durable workflows (<code>plan → build → review → fix</code>) whose step order survives a crash, while the intelligent work inside each step is delegated to a swappable, supervised external AI harness — Claude Code and <code>pi</code> ship today.</p>
@@ -156,6 +166,30 @@
   <script>
     var y = document.getElementById("year");
     if (y) y.textContent = String(new Date().getFullYear());
+
+    // Theme toggle — the no-flash <head> script already set the initial theme.
+    (function () {
+      var toggle = document.getElementById("themeToggle");
+      var meta = document.querySelector('meta[name="theme-color"]');
+      var BG = { dark: "#131318", light: "#faf9f7" };
+      function sync(theme) {
+        var isLight = theme === "light";
+        if (toggle) {
+          toggle.setAttribute("aria-pressed", String(isLight));
+          toggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+        }
+        if (meta) meta.setAttribute("content", BG[theme] || BG.dark);
+      }
+      sync(document.documentElement.dataset.theme || "dark");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          var next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+          document.documentElement.dataset.theme = next;
+          try { localStorage.setItem("theme", next); } catch (e) {}
+          sync(next);
+        });
+      }
+    })();
   </script>
 </body>
 </html>

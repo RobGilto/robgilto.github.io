@@ -120,6 +120,43 @@
     sections.forEach(function (s) { observer.observe(s.el); });
   }
 
+  /* ---- Theme toggle ---- */
+  // The no-flash inline <head> script has already set documentElement.dataset.theme.
+  // Here we keep the toggle's a11y state, the theme-color meta, and localStorage in sync.
+  var themeToggle = document.getElementById("themeToggle");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var THEME_BG = { dark: "#131318", light: "#faf9f7" };
+
+  function syncThemeUI(theme) {
+    var isLight = theme === "light";
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-pressed", String(isLight));
+      themeToggle.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark theme" : "Switch to light theme"
+      );
+    }
+    if (themeMeta) {
+      themeMeta.setAttribute("content", THEME_BG[theme] || THEME_BG.dark);
+    }
+  }
+
+  syncThemeUI(document.documentElement.dataset.theme || "dark");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next =
+        document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {
+        /* storage unavailable (private mode) — toggle still works for the session */
+      }
+      syncThemeUI(next);
+    });
+  }
+
   /* ---- Footer year ---- */
   var yearEl = document.getElementById("year");
   if (yearEl) {

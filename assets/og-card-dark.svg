@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="88%" cy="6%" r="60%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#131318"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="12" height="630" fill="#6366f1"/>
+
+  <!-- brand mark -->
+  <rect x="80" y="86" width="84" height="84" rx="20" fill="#4f46e5"/>
+  <text x="122" y="142" text-anchor="middle"
+        font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+        font-size="40" font-weight="700" letter-spacing="-2" fill="#ffffff">RG</text>
+
+  <!-- name + title -->
+  <text x="80" y="300"
+        font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        font-size="84" font-weight="800" letter-spacing="-3" fill="#ededf2">Robert Gilto</text>
+  <text x="80" y="372"
+        font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        font-size="40" font-weight="600" letter-spacing="-0.5" fill="#c9c9d2">AI-assisted engineering &amp; automation that ships</text>
+
+  <!-- accent rule -->
+  <rect x="82" y="410" width="72" height="5" rx="2.5" fill="#6366f1"/>
+
+  <!-- supporting line -->
+  <text x="80" y="470"
+        font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+        font-size="27" font-weight="500" fill="#a5b4fc">Spec-driven development · Claude Code · Python · SQL</text>
+
+  <!-- footer line -->
+  <text x="80" y="556"
+        font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+        font-size="24" font-weight="500" fill="#9a9aa6">robgilto.github.io   ·   Australia / APAC</text>
+</svg>
