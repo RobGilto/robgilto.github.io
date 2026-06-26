@@ -33,7 +33,7 @@
   <meta name="twitter:description" content="I build automation and AI tools spec-first with Claude Code: Python, SQL, and LLM workflows. Australia / APAC." />
   <meta name="twitter:image" content="https://robgilto.github.io/assets/og-card-dark.png" />
 
-  <link rel="stylesheet" href="styles.css?v=20260624-darkmode" />
+  <link rel="stylesheet" href="styles.css?v=20260626-printresume" />
 
   <!-- JSON-LD Person schema -->
   <script type="application/ld+json">
@@ -144,6 +144,10 @@
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2A10 10 0 0 0 8.84 21.5c.5.08.66-.23.66-.5v-1.7c-2.77.6-3.36-1.34-3.36-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.59.67.5A10 10 0 0 0 12 2Z"/></svg>
             GitHub
           </a>
+          <button class="btn btn-ghost" type="button" onclick="window.print()">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3Zm-3 11H8v-5h8v5Zm3-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-1-9H6v4h12V3Z"/></svg>
+            Save résumé (PDF)
+          </button>
         </div>
       </div>
     </section>
@@ -330,6 +334,24 @@
 
           <article class="project-card">
             <div class="project-card-top">
+              <span class="project-kicker">Production · Custom platform cards</span>
+              <span class="project-status" aria-label="Status: in production">● In production</span>
+            </div>
+            <h3 class="project-title">Custom Domo visualization cards &amp; dashboards — Nine Entertainment</h3>
+            <p class="project-problem"><strong>Problem.</strong> Domo's native cards left performance and flexibility on the table for Nine's reporting — limited configuration and visualizations that weren't optimised for the team's needs.</p>
+            <p class="project-approach"><strong>Approach.</strong> I built custom visualization cards and dashboards that replace the less-optimised native cards. Each exposes configurable settings to admin users so the team can tune behaviour without touching code, and ships with full developer documentation so it stays maintainable after handover.</p>
+            <p class="project-outcome"><strong>Outcome.</strong> In production at Nine — faster, admin-configurable, well-documented cards that replaced native ones and that the team can own and extend.</p>
+            <ul class="chips chips-sm">
+              <li class="chip">Domo</li>
+              <li class="chip">JavaScript</li>
+              <li class="chip">Custom app cards</li>
+              <li class="chip">Claude Code</li>
+              <li class="chip">Developer docs</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card-top">
               <span class="project-kicker">Production · Chrome extension</span>
               <span class="project-status" aria-label="Status: shipped">● Shipped</span>
             </div>
@@ -410,6 +432,8 @@
             </div>
             <ul class="role-bullets">
               <li>Since Mar 2026, embedded with <strong>Nine Entertainment</strong> as a forward-deployed technical consultant alongside the support role. I built custom Claude Code Skills and an agentic case-handling workflow, with human-gated response drafts and cost-aware model routing, that lets me carry the workload of roughly <strong>2.5 people</strong>.</li>
+              <li>Built custom Domo visualization cards and dashboards for Nine that replaced less-optimised native cards — with admin-configurable settings and full developer documentation so the team can maintain and extend them.</li>
+              <li>Started training Nine staff to use <strong>Claude Code</strong> to extend Domo's SaaS capabilities themselves — scaling the build practice into the client's own team rather than keeping it on me.</li>
               <li>Designed, built, and delivered end-to-end Domo solutions for enterprise customers — including a production-ready App Studio extension application with full documentation.</li>
               <li>Resolved <strong>100+ complex technical cases</strong> for APAC's largest customers, maintaining high satisfaction and reducing escalation resolution times.</li>
               <li>Optimized SQL queries, Beast Mode calculations, and Magic ETL workflows, and troubleshot data pipelines ingesting into Domo from BigQuery and MySQL.</li>
@@ -422,6 +446,7 @@
               <p class="role-meta"><span class="role-org">Mindbody</span> · Jun 2019 – Jul 2023</p>
             </div>
             <ul class="role-bullets">
+              <li>Became the <strong>SME for the Mindbody Marketing Suite</strong>, partnering with customers to gather email and SMS campaign-management requirements and build custom solutions — work that earned high praise.</li>
               <li>Built a Python automation script for Twilio mobile compliance that cut daily processing time by <strong>50%</strong> and minimized errors.</li>
               <li>Built Excel VBA macros and Power Query solutions to automate complex data processing and reporting for customers.</li>
               <li>Resolved client-facing technical escalations across all Mindbody cloud products; recognized with 38 peer recognitions for impact and helpfulness.</li>
@@ -595,6 +620,157 @@
       <p><a href="#top">Back to top ↑</a></p>
     </div>
   </footer>
+
+  <!-- PRINT-ONLY 2-PAGE RÉSUMÉ — hidden on screen, shown only when printing/saving as PDF -->
+  <img id="pr-band" src="assets/resume-band.png" alt="" aria-hidden="true" />
+  <div id="print-resume" aria-hidden="true">
+    <div class="pr-head">
+      <div class="pr-name">Robert Gilto</div>
+      <div class="pr-title">AI-Assisted Engineering &amp; Automation · Data Consultant</div>
+      <div class="pr-contact">
+        <span>robgilto@gmail.com</span>
+        <span>+61 439 222 211</span>
+        <span>Australia / APAC</span>
+        <span><a href="https://robgilto.github.io/">robgilto.github.io</a></span>
+        <span><a href="https://github.com/RobGilto">github.com/RobGilto</a></span>
+        <span><a href="https://www.linkedin.com/in/robert-gilto-331312171">LinkedIn</a></span>
+      </div>
+    </div>
+
+    <p class="pr-summary">
+      I build automation and AI tools that ship. I spot the platform gap, write the spec, then turn it
+      into a production solution. I work spec-first with Claude Code: an ambiguous problem becomes a written
+      spec, then shippable software I check against. <strong>100+ enterprise cases resolved, production automation
+      shipped, and a public open-source agent platform behind a 146-test gate.</strong>
+    </p>
+
+    <h2>Core skills</h2>
+    <dl class="pr-skills">
+      <dt>AI / agentic</dt>
+      <dd>Claude Code (custom Skills, slash commands, subagents), OpenAI (API + ChatGPT), Google Gemini, MCP servers, agentic workflows, model routing, prompt iteration, spec-driven development</dd>
+      <dt>Languages</dt>
+      <dd>Python, JavaScript, SQL, Elixir, VBA, Bash</dd>
+      <dt>Data</dt>
+      <dd>BigQuery, MySQL, SQL Server, ETL / pipeline design, data modeling, Power Query, Domo (Beast Mode, Magic ETL, App Studio)</dd>
+      <dt>Platform / infra</dt>
+      <dd>AWS (PrivateLink), Postman, Phoenix / LiveView, PostgreSQL, Oban, Salesforce, Jira, Windows Server, Active Directory, Linux</dd>
+      <dt>Practice</dt>
+      <dd>Discovery &amp; requirements, solution design, stakeholder coordination, UAT &amp; go-live, technical training</dd>
+    </dl>
+
+    <h2>Selected work</h2>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">repo_builder — AI agent orchestration platform</span>
+        <span class="pr-dates">Open source · Public on GitHub</span>
+      </div>
+      <ul>
+        <li>Built a harness-agnostic platform on Elixir/Phoenix/OTP for deterministic, crash-durable agent workflows (plan, build, review, fix) that delegate the model work to a swappable, supervised AI harness (Claude Code, pi).</li>
+        <li>Shipped a real-time LiveView console, durable Oban/webhook triggers, and a zero-orphan process ledger, behind a <strong>146-test</strong> suite and a five-command green gate (compile-as-errors, format, Credo, test, Dialyzer).</li>
+      </ul>
+      <div class="pr-tags">Elixir · Phoenix / LiveView · OTP · Oban · PostgreSQL · Claude Code · MCP</div>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Agentic case-handling system — Nine Entertainment</span>
+        <span class="pr-dates">Production · Forward-deployed</span>
+      </div>
+      <ul>
+        <li>Authored custom Claude Code <strong>Skills, slash commands, and subagents</strong>, composed into an agentic workflow that takes a case from prompt to triggered troubleshooting, to a recommended next-best action, to a drafted customer response I preview and approve before it sends.</li>
+        <li>Routed models by job to balance speed against cost (Haiku for API calls, Opus for troubleshooting, Sonnet for drafting). I now carry the workload of roughly <strong>2.5 people</strong> while I keep scaling the system.</li>
+      </ul>
+      <div class="pr-tags">Claude Code · Custom Skills · Agentic workflows · Human-gated drafts · Model routing</div>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Domo platform extensions — Nine Entertainment</span>
+        <span class="pr-dates">Production · Shipped</span>
+      </div>
+      <ul>
+        <li>Spotted that Domo's App Studio had no native PDF export, designed a Chrome extension, built it with Claude Code, tested it against real customer dashboards, and shipped it into active enterprise use.</li>
+        <li>Built custom visualization cards and dashboards that replace less-optimised native cards — with <strong>admin-configurable settings</strong> and full developer documentation so the team can maintain and extend them after handover.</li>
+      </ul>
+      <div class="pr-tags">Chrome Extension API · JavaScript · Custom app cards · Claude Code · Developer docs</div>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Email notification filter (38K/day) &amp; Twilio compliance automation</span>
+        <span class="pr-dates">Deployed · Shipped</span>
+      </div>
+      <ul>
+        <li>Scripted a Python filter and cleanup for an enterprise mail server buried under <strong>38,000+</strong> dataset notifications a day, proved it in development, and deployed within days.</li>
+        <li>Built a Python automation against the Twilio API for mobile compliance across Mindbody platforms that cut daily processing time by <strong>50%</strong> and reduced errors.</li>
+      </ul>
+      <div class="pr-tags">Python · Claude Code · Twilio API</div>
+    </div>
+
+    <h2>Experience</h2>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Senior Technical Advisor — Preferred Support Team · <span class="pr-org">Domo</span></span>
+        <span class="pr-dates">Jul 2023 – Present</span>
+      </div>
+      <ul>
+        <li>Since Mar 2026, embedded with <strong>Nine Entertainment</strong> as a forward-deployed technical consultant, running the agentic case-handling system above alongside the support role.</li>
+        <li>Started <strong>training Nine staff to use Claude Code</strong> to extend Domo's SaaS capabilities themselves — scaling the build practice into the client's own team.</li>
+        <li>Designed, built, and delivered end-to-end Domo solutions for enterprise customers, including production App Studio extensions and custom cards with full documentation.</li>
+        <li>Resolved <strong>100+ complex technical cases</strong> for APAC's largest customers, reducing escalation resolution times.</li>
+        <li>Optimized SQL, Beast Mode calculations, and Magic ETL, and troubleshot data pipelines ingesting into Domo from BigQuery and MySQL. Drove an AWS PrivateLink integration between the customer and internal teams.</li>
+      </ul>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Lead Customer Support Specialist · <span class="pr-org">Mindbody</span></span>
+        <span class="pr-dates">Jun 2019 – Jul 2023</span>
+      </div>
+      <ul>
+        <li>Became the <strong>SME for the Mindbody Marketing Suite</strong> — partnering with customers to gather email and SMS campaign-management requirements and build custom solutions, earning high praise.</li>
+        <li>Built Python automation (Twilio compliance) and Excel VBA / Power Query solutions to automate complex data processing and reporting for customers.</li>
+        <li>Resolved client-facing technical escalations across all Mindbody cloud products; earned 38 peer recognitions for impact and helpfulness.</li>
+      </ul>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">IT Support Technician · <span class="pr-org">Supportedge</span></span>
+        <span class="pr-dates">Nov 2018 – Jun 2019</span>
+      </div>
+      <ul>
+        <li>Delivered remote and onsite support across Windows and Linux for retail and SMB clients; built and installed Windows Server, Active Directory, and backup systems.</li>
+      </ul>
+    </div>
+
+    <div class="pr-entry">
+      <div class="pr-entry-head">
+        <span class="pr-role">Senior Account Analyst · <span class="pr-org">State Street Group</span></span>
+        <span class="pr-dates">Feb 2007 – Apr 2014</span>
+      </div>
+      <ul>
+        <li>Performed investment accounting and reconciliation on large financial datasets, automating team tasks with Excel macros to improve operational efficiency.</li>
+      </ul>
+    </div>
+
+    <h2>Education</h2>
+    <div class="pr-two">
+      <div class="pr-entry pr-edu">
+        <span class="pr-role">Postgraduate coursework, Data Science</span>
+        <span class="pr-dates">James Cook University · 2020 – 2023</span>
+        <ul><li>Data management, data modeling, statistical methods, data cleaning, wrangling, visualization.</li></ul>
+      </div>
+      <div class="pr-entry pr-edu">
+        <span class="pr-role">BEng/BBus — Software Engineering &amp; Business Finance</span>
+        <span class="pr-dates">University of Technology Sydney · 2000 – 2006</span>
+        <ul><li>Database design and data modeling alongside financial analysis and project management.</li></ul>
+      </div>
+    </div>
+    <p class="pr-tags" style="padding-left:0; margin-top:4px;">Continuous learning: I dedicate my evenings to agentic engineering professional development — building custom Claude Code Skills, slash commands, and subagents, and pursuing agentic framework certifications (LangGraph, Claude Agent SDK). Self-directed and hands-on, sharpened daily through Claude Code, OpenAI, and Gemini.</p>
+  </div>
 
   <script src="main.js?v=20260624-darkmode" defer></script>
 </body>
